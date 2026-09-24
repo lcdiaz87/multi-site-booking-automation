@@ -1,21 +1,39 @@
-# how to create the project with the sample
-run this command in the terminal gitbash to run it as linux
-```
-npm init -y // create the package.json by default
-npm i --save-dev @wdio/cli // install webdrioverio CLI
-./node_modules/.bin/wdio config -y // create a sample and setup the project by default
-./node_modules/.bin/wdio run wdio.conf.js // run the project and you can see the test by default
+# Multi-site booking automation
+
+End-to-end automation of the same hotel-booking journey across three different booking sites, to check whether one use case can be validated against three completely different interfaces.
+
+Built with **WebdriverIO** (JavaScript, Node.js).
+
+## Why
+
+Booking flows look the same to a user and are completely different underneath: different DOM structures, different date pickers, different navigation.
+The interesting question isn't "can I automate one site", it's how much of the test can be shared before each site forces you to fork the logic.
+
+## What it covers
+
+| Site | Flow |
+|---|---|
+| <sitio 1> | Search → select dates → pick a hotel → booking form |
+| <sitio 2> | " |
+| <sitio 3> | " |
+
+## Stack
+
+- WebdriverIO — test runner and browser automation
+- Node.js / npm
+
+## Running it
+
+```bash
+npm install
+npx wdio run wdio.conf.js
 ```
 
+## What I took from it
 
-# how to setup your local environment
-```
-1 - install VSCode (from website: https://code.visualstudio.com/download)
-2 - install git (from website: https://git-scm.com/downloads)
-3 - clone repository -> on console: git clone 
-4 - install node.js (from website: https://nodejs.org/en/download/)
-5 - verify installation -> on console: 
-        node -v            
-        npm -v
-6 - npm install
-7 - npx wdio
+- Date pickers are where cross-site automation breaks down: every site implements them differently, and they are the least stable part of the flow.
+- Loading indicators forced a different waiting strategy on each site: one showed a single loader for the whole page, another rendered one loader per component. There is no generic "wait until the page is loaded", therefore I wait for the element I am about to use.
+
+---
+
+*Originally built as a technical exercise; it led to my SDET role at Mil Mas 8 SL.*
